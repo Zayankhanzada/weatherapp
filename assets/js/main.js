@@ -1,116 +1,150 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const url = 'https://api.weatherapi.com/v1/forecast.json?key=e5583ddc48ce44858a8145320242404&q=hyderabad%20sindh&days=8&aqi=no&alerts=no';
 
-    async function fetchWeather(url) {
-        try {
-            const response = await fetch(url);
-            const result = await response.json();
-            console.log(result); // Log the entire result to the console
+function invalidname() {
+    alert("Invalid City");
+}
+// Functions for loading indicator
+function showLoading() {
+    document.querySelector(".lazy-loading").style.display = "flex";
+}
 
-            // Extract necessary weather data
-            const current = result.current;
-            const location = result.location;
-            const forecast = result.forecast.forecastday[0];
+function hideLoading() {
+    document.querySelector(".lazy-loading").style.display = "none";
+}
 
-            console.log('Current Weather:', current); // Log current weather data
-            console.log('Location Data:', location); // Log location data
-            console.log('Forecast Data:', forecast); // Log forecast data
-
-            const { temp_c, humidity, wind_kph, condition, feelslike_c, cloud, is_day } = current;
-            const { day } = forecast;
-            const { avgtemp_c } = day;
-            const iconUrl = condition.icon; // Get the weather icon URL
-
-            // Log the extracted values to verify correctness
-            console.log('Temperature:', temp_c);
-            console.log('Average Temp:', avgtemp_c);
-            console.log('Feels Like:', feelslike_c);
-            console.log('Humidity:', humidity);
-            console.log('Wind Speed:', wind_kph);
-            console.log('Condition:', condition);
-            console.log('Cloudiness:', cloud);
-            console.log('Icon URL:', iconUrl);
-
-            // Update HTML elements with fetched data
-            document.querySelector('#current-temp').textContent = `${temp_c}°C`;
-            document.querySelector('#weather-description').textContent = condition.text;
-            document.querySelector('#avg-temp').textContent = `${avgtemp_c}°C`;
-            document.querySelector('#feels-like').textContent = `${feelslike_c}°C`;
-            document.querySelector('#humidity').textContent = `${humidity}%`;
-            document.querySelector('#wind-speed').textContent = `${wind_kph} km/h`;
-            document.querySelector('#cloudiness').textContent = `${cloud}%`;
-            document.querySelector('#weather-icon').src = iconUrl; // Set the icon URL
-
-            // Update location
-            const locationElement = document.querySelector('#location');
-            if (locationElement) {
-                locationElement.textContent = `${location.name}, ${location.region}`;
-            } else {
-                console.error('Location element not found');
-            }
-
-            // Update time
-            const time = new Date(current.last_updated);
-            let hours = time.getHours();
-            const minutes = time.getMinutes().toString().padStart(2, '0');
-            const dayName = time.toLocaleDateString('en-US', { weekday: 'long' });
-            const year = time.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-
-            const ampm = hours >= 12 ? 'PM' : 'AM';
-            hours = hours % 12;
-            hours = hours ? hours : 12; // the hour '0' should be '12'
-
-            document.querySelector('#time').textContent = `${hours}:${minutes} ${ampm}`;
-            document.querySelector('#day').textContent = dayName;
-            document.querySelector('#year').textContent = year;
-
-            // Update background based on weather description
-            // const body = document.body;
-            // switch (condition.text.toLowerCase()) {
-            //     case 'sunny':
-            //     case 'clear':
-            //         body.style.backgroundImage = 'url(sunny.jpg)';
-            //         break;
-            //     case 'cloudy':
-            //     case 'overcast':
-            //         body.style.backgroundImage = 'url(https://www.adventurebikerider.com/wp-content/uploads/2017/10/tumblr_o27c7fByaO1tchrkco1_500.gif?_gl=1*19k6rld*_up*MQ..*_ga*OTYxMzgzNzI4LjE3MjIxOTgxNjA.*_ga_LVJDHLPXC0*MTcyMjE5ODE2MC4xLjAuMTcyMjE5ODE2MC4wLjAuMA..)';
-            //         break;
-            //     case 'rain':
-            //     case 'rainy':
-            //     case 'light rain':
-            //     case 'patchy rain':
-            //     case 'patchy rain nearby':
-            //         body.style.backgroundImage = 'url(rain.jpg)';
-            //         break;
-            //     case 'snow':
-            //     case 'snowy':
-            //         body.style.backgroundImage = 'url(snow.jpg)';
-            //         break;
-            //     default:
-            //         body.style.backgroundImage = 'url(default.jpg)';
-            // }
-
-            // Update background based on day or night
-            // if (is_day) {
-            //     body.style.backgroundColor = '#a0d3ff'; // Light blue for day
-            // } else {
-            //     body.style.backgroundColor = '#001f3f'; // Dark blue for night
-            // }
-
-        } catch (error) {
-            console.error('Error fetching weather data:', error);
-        }
+// Function for getting city from the input field
+function updateWeather() {
+    var city = document.getElementById("cityInput").value.trim();
+    if (city) {
+        console.log("Fetching weather for:", city);
+        fetchWeather(city);
     }
+    else {
+        invalidname();
+    }
+}
 
-    // Fetch weather data on page load
-    fetchWeather(url);
 
-    // Form submission event listener to update weather based on location input
-    document.querySelector('#location-form').addEventListener('submit', async (event) => {
-        event.preventDefault();
-        const locationInput = event.target.querySelector('input').value;
-        const newUrl = `https://api.weatherapi.com/v1/forecast.json?key=e5583ddc48ce44858a8145320242404&q=${locationInput}&days=8&aqi=no&alerts=no`;
+// Function to fetch weather data
+async function fetchWeather(city) {
+    const url = `https://api.weatherapi.com/v1/forecast.json?key=e5583ddc48ce44858a8145320242404&q=${city}&days=8&aqi=no&alerts=no`;
 
-        fetchWeather(newUrl);
-    });
-});
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw alert('Invalid city name or network error');
+        }
+        const result = await response.json();
+
+        // Check if the result contains valid data
+        if (!result.location || !result.current) {
+            throw new Error('Invalid data received from API');
+        }
+        console.log(result)
+        // Extract weather data
+        var location = result.location.name;
+        var temperature = result.current.temp_c;
+        var avg_temp = result.current.temp_c;
+        var wind_kph = result.current.wind_kph;
+        var cloudy = result.current.cloud;
+        var feelslike_c = result.current.feelslike_c;
+        var icon = result.current.condition.icon;
+        var humidity = result.current.humidity;
+        var time = result.current.last_updated;
+        var status = result.current.condition.text;
+        var day2 = result.forecast.forecastday[1];
+        var day3 = result.forecast.forecastday[2];
+
+        // for time and date it will extract time in 12-hour time format
+        var time = new Date(result.current.last_updated);
+        let day = time.getDate();
+        let month = time.getMonth() + 1; // Months are zero-indexed (0-11)
+        let year = time.getFullYear();
+
+        let hours = time.getHours();
+        let minutes = time.getMinutes().toString().padStart(2, '0');
+
+        const ampm = hours >= 12 ? 'PM' : 'AM';
+        hours = hours % 12;
+        hours = hours ? hours : 12; // the hour '0' should be '12'
+
+        let formattedDate = `${day}/${month}/${year}`;
+        let formattedTime = `${hours}:${minutes} ${ampm}`;
+        let fullFormattedDateTime = `${formattedDate} ${formattedTime}`;
+        // console.log(fullFormattedDateTime);
+
+        // background according to weather conditions
+        switch (status) {
+            case 'Partly cloudy':
+            case 'Cloudy':
+            case 'Overcast':
+                document.querySelector('body').style.backgroundImage = 'url("https://images.pexels.com/photos/209831/pexels-photo-209831.jpeg")';
+                break;
+            case 'Sunny':
+            case 'Clear':
+                document.querySelector('body').style.backgroundImage = 'url("https://images.pexels.com/photos/186980/pexels-photo-186980.jpeg?cs=srgb&dl=pexels-tahir-shaw-50609-186980.jpg&fm=jpg")';
+                break;
+            case 'Light rain':
+            case 'Moderate or heavy rain with thunder':
+            case 'Patchy rain nearby':
+                document.querySelector('body').style.backgroundImage = 'url("https://images.pexels.com/photos/2877066/pexels-photo-2877066.jpeg?auto=compress&cs=tinysrgb&w=600")';
+                break;
+            case 'Snowy':
+                document.querySelector('body').style.backgroundImage = 'url("https://images.pexels.com/photos/3540375/pexels-photo-3540375.jpeg?auto=compress&cs=tinysrgb&w=600")';
+                break;
+            case 'Windy':
+            case 'Mist':
+                document.querySelector('body').style.backgroundImage = 'url("https://images.pexels.com/photos/2449543/pexels-photo-2449543.jpeg?auto=compress&cs=tinysrgb&w=600")';
+                break;
+            case 'Thunderstorm':
+            case 'Lightning':
+                document.querySelector('body').style.backgroundImage = 'url("https://images.pexels.com/photos/2531709/pexels-photo-2531709.jpeg?auto=compress&cs=tinysrgb&w=600")';
+                break;
+            default:
+                document.querySelector('body').style.backgroundImage = 'url("https://images.pexels.com/photos/186980/pexels-photo-186980.jpeg?cs=srgb&dl=pexels-tahir-shaw-50609-186980.jpg&fm=jpg")';
+                break;
+        }
+
+
+
+        // Update HTML with current weather data
+        document.querySelector(".city_name").textContent = location;
+        document.querySelector(".current_temp").textContent = temperature + "°C";
+        document.querySelector(".avg_temp").textContent = avg_temp + "°C";
+        document.querySelector(".windy").textContent = wind_kph + "km/h";
+        document.querySelector(".cloudy").textContent = cloudy + "%";
+        document.querySelector(".feels_like").textContent = feelslike_c + "°C";
+        document.querySelector(".icon").src = icon;
+        document.querySelector(".humidity").textContent = humidity + "%";
+        document.querySelector(".time").textContent = fullFormattedDateTime;
+        document.querySelector(".status").textContent = status;
+
+        // Update HTML with forecast data
+        document.querySelector('.day2-date').textContent = day2.date;
+        document.querySelector('.day2-temp').textContent = `${day2.day.avgtemp_c}°C`;
+        document.querySelector('.day2-condition').textContent = day2.day.condition.text;
+        document.querySelector('.day2-icon').src = day2.day.condition.icon;
+
+        document.querySelector('.day3-date').textContent = day3.date;
+        document.querySelector('.day3-temp').textContent = `${day3.day.avgtemp_c}°C`;
+        document.querySelector('.day3-condition').textContent = day3.day.condition.text;
+        document.querySelector('.day3-icon').src = day3.day.condition.icon;
+        hideLoading();
+        // document.querySelector(".error-message").textContent = '';
+
+
+    }
+    catch (error) {
+        hideLoading();
+        // document.querySelector(".error-message").textContent = `Error: ${error.message}`;
+        console.error("The error has been caught", error);
+    }
+}
+
+
+
+// Fetch weather for  random cities on page load
+const randomCities = ["London", "New York", "Tokyo", "Sydney", "Paris", "Karachi", "Multan", "Dubai", "Moscow", "Berlin", "Toronto"];
+window.onload = function () {
+    const randomCity = randomCities[Math.floor(Math.random() * randomCities.length)];
+    fetchWeather(randomCity);
+};

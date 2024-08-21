@@ -1,0 +1,316 @@
+// code through class
+
+<div class="row position-relative weather-details bg-blur p-lg-5 p-3 mt-30 ">
+                <div class="card weather-info border-0 p-0 bg-transparent mt-5">
+                    <h3 class="fs-20 text-white d-flex justify-content-center align-items-center gap-2">Weather Status:
+                        <span class="fs-6 mt-1 text-white text-uppercase text-center status"> --- </span><img
+                            class="icon w-20 " src="" alt=""></h3>
+                    <div class="row justify-content-center align-items-center bg-transparent row-gap-4 mt-5">
+                        <div class="col-12">
+                            <div
+                                class="d-flex justify-content-between text-center align-items-center column-gap-5 flex-nowrap">
+                                <div class="col-6">
+                                    <h4 class="text-grey fw-normal fs-18">Feels like</h4>
+                                </div>
+                                <div class="col-6">
+                                    <h4 class=" d-flex flex-nowrap column-gap-2 align-items-center ">
+                                        <span class="text-white fs-18 fw-normal feels_like">--°</span>
+                                        <!-- <img src="/assets/images/hot-temp.png" alt="" class="img-fluid"> -->
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div
+                                class="d-flex justify-content-between align-items-center text-center column-gap-5 flex-nowrap">
+                                <div class="col-6">
+                                    <h4 class="text-grey fw-normal fs-18">Avg Temp</h4>
+                                </div>
+                                <div class="col-6">
+                                    <h4 class=" d-flex flex-nowrap column-gap-2 align-items-center " id="temp-min">
+                                        <span class="text-white fs-18 fw-normal avg_temp">--°</span>
+                                        <!-- <img src="/assets/images/cold-temp.png" alt="" class="img-fluid"> -->
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div
+                                class="d-flex justify-content-between align-items-center text-center column-gap-5 flex-nowrap">
+                                <div class="col-6">
+                                    <h4 class="text-grey fw-normal fs-18">Humidity</h4>
+                                </div>
+                                <div class="col-6">
+                                    <h4 class=" d-flex flex-nowrap column-gap-2 align-items-center "> <span
+                                            class="text-white fs-18 fw-normal humidity">--%</span>
+                                        <img src="/assets/images/Humidity.png" alt="" class="img-fluid">
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div
+                                class="d-flex justify-content-between alingn-items-center text-center column-gap-5 flex-nowrap">
+                                <div class="col-6">
+                                    <h4 class="text-grey fw-normal fs-18">Cloudy</h4>
+                                </div>
+                                <div class="col-6">
+                                    <h4 class=" d-flex flex-nowrap column-gap-2 align-items-center "> <span
+                                            class="text-white fs-18 fw-normal cloudy">--%</span>
+                                        <img src="/assets/images/Cloudy.png" alt="" class="img-fluid">
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div
+                                class="d-flex justify-content-between align-items-center text-center column-gap-5 flex-nowrap">
+                                <div class="col-6">
+                                    <h4 class="text-grey fw-normal fs-18">Windy</h4>
+                                </div>
+                                <div class="col-6">
+                                    <h4 class=" d-flex flex-nowrap column-gap-2 align-items-center "> <span
+                                            class="text-white fs-18 fw-normal windy">-- km/h</span>
+                                        <img src="/assets/images/windy.png" alt="" class="img-fluid">
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card bg-transparent border-0 p-0 my-5">
+                    <h3 class="text-white text-center fs-20">Upcoming Day's Weather Forecast...</h3>
+                    <div class="row justify-content-center align-items-center row-gap-4 mt-5">
+
+                        <div class="col-12">
+                            <div class="d-flex justify-content-center align-items-center mt-4">
+                                <div class="col-7">
+                                    <h4 class="d-flex flex-nowrap flex-row column-gap-3 align-items-center">
+                                        <img src="" alt="" class="img-fluid day2-icon">
+                                        <span
+                                            class="d-flex flex-wrap flex-column text-wrap fs-18 fw-normal text-white"><span
+                                                class="day2-date">09:00</span>
+                                            <span class="day2-condition">Snow</span></span>
+                                    </h4>
+                                </div>
+                                <div class="col-5">
+                                    <div class="text-end">
+                                        <h4 class="text-white fs-24 day2-temp">--°</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="d-flex justify-content-center align-items-center mt-4">
+                                <div class="col-7">
+                                    <h4 class="d-flex flex-row flex-nowrap column-gap-3 align-items-center">
+                                        <img src="" alt="" class="img-fluid day3-icon">
+                                        <span
+                                            class="d-flex flex-wrap flex-column text-wrap fs-18 fw-normal text-white"><span
+                                                class="day3-date">10:00</span>
+                                            <span class="day3-condition">Snow</span></span>
+                                    </h4>
+                                </div>
+                                <div class="col-5">
+                                    <div class="text-end">
+                                        <h4 class="text-white fs-24 day3-temp">21°</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- <div class="col-12">
+                            <div class="d-flex justify-content-center align-items-center mt-4">
+                                <div class="col-2">
+                                    <h4 class="d-flex flex-row flex-nowrap column-gap-3 align-items-center">
+                                        <img src="/assets/images/snow.png" alt="" class="img-fluid">
+                                        <span
+                                            class="d-flex flex-nowrap flex-column text-wrap fs-18 fw-normal text-grey">02:00
+                                            Snow</span>
+                                    </h4>
+                                </div>
+
+                                <div class="col-8">
+                                    <div class="text-end">
+                                        <h4 class="text-white fs-24">21°</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="d-flex justify-content-center align-items-center mt-4">
+                                <div class="col-2">
+                                    <h4 class="d-flex flex-nowrap flex-row column-gap-3 align-items-center">
+                                        <img src="/assets/images/snow.png" alt="" class="img-fluid">
+                                        <span
+                                            class="d-flex flex-wrap flex-column text-wrap fs-18 fw-normal text-grey">09:00
+                                            Snow</span>
+                                    </h4>
+                                </div>
+                                <div class="col-8">
+                                    <div class="text-end">
+                                        <h4 class="text-white fs-24">19°</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                         -->
+                    </div>
+                </div>
+            </div>
+
+
+
+{/* code through id's */}
+
+            <div class="row position-relative weather-details bg-blur p-lg-5 p-3 mt-30 ">
+                <div class="card weather-info border-0 p-0 bg-transparent mt-5">
+                    <h3 class="text-white text-center text-lg-start text-uppercase">thunderstorm with light drizzle</h3>
+                    <div class="row justify-content-center bg-transparent row-gap-4 mt-5">
+                        <div class="col-12">
+                            <div class="d-flex justify-content-center column-gap-4 flex-nowrap">
+                                <div class="col-6">
+                                    <h4 class="text-grey text-center fw-normal">Feels Like</h4>
+                                </div>
+                                <div class="col-6">
+                                    <h4
+                                        class=" d-flex justify-content-center flex-nowrap column-gap-2 align-items-center ">
+                                        <span class="text-white fw-normal" id="feels-like">--°</span>
+                                        <!-- <img src="/assets/images/hot-temp.png" alt="" class="img-fluid">-->
+                                    </h4> 
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="d-flex justify-content-center column-gap-4 flex-nowrap">
+                                <div class="col-6">
+                                    <h4 class="text-grey text-center fw-normal">Avg Temp</h4>
+                                </div>
+                                <div class="col-6">
+                                    <h4
+                                        class=" d-flex justify-content-center flex-nowrap column-gap-2 align-items-center ">
+                                        <span class="text-white fw-normal" id="avg-temp">--°</span>
+                                        <!-- <img src="/assets/images/cold-temp.png" alt="" class="img-fluid"> -->
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="d-flex justify-content-center column-gap-4 flex-nowrap">
+                                <div class="col-6">
+                                    <h4 class="text-grey text-center fw-normal">Humidity</h4>
+                                </div>
+                                <div class="col-6">
+                                    <h4
+                                        class=" d-flex justify-content-center flex-nowrap column-gap-2 align-items-center ">
+                                        <span class="text-white fw-normal" id="humidity">--%</span>
+                                        <img src="/assets/images/Humidity.png" alt="" class="img-fluid">
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="d-flex justify-content-center column-gap-5  flex-nowrap">
+                                <div class="col-6">
+                                    <h4 class="text-grey text-center fw-normal" >Cloudy</h4>
+                                </div>
+                                <div class="col-6">
+                                    <h4
+                                        class=" d-flex justify-content-center flex-nowrap column-gap-2 align-items-center ">
+                                        <span class="text-white fw-normal"id="cloudiness">--%</span>
+                                        <img src="/assets/images/Cloudy.png" alt="" class="img-fluid">
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="d-flex justify-content-center column-gap-5 flex-nowrap">
+                                <div class="col-6">
+                                    <h4 class="text-grey text-center fw-normal">Wind</h4>
+                                </div>
+                                <div class="col-6">
+                                    <h4
+                                        class=" d-flex justify-content-center flex-nowrap column-gap-2 align-items-center ">
+                                        <span class="text-white fw-normal" id="wind_kph">--km/h</span>
+                                        <img src="/assets/images/windy.png" alt="" class="img-fluid">
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card bg-transparent border-0 p-0 my-5">
+                    <h3 class="text-white text-center fs-20">Today’s Weather Forecast...</h3>
+                    <div class="row justify-content-center align-items-center row-gap-4 mt-5">
+                        <div class="col-12">
+                            <div class="d-flex justify-content-center align-items-center mt-4">
+                                <div class="col-2">
+                                    <h4 class="d-flex flex-nowrap flex-row column-gap-3 align-items-center">
+                                        <img src="/assets/images/snow.png" alt="" class="img-fluid">
+                                        <span
+                                            class="d-flex flex-wrap flex-column text-wrap fs-18 fw-normal text-grey">09:00
+                                            Snow</span>
+                                    </h4>
+                                </div>
+                                <div class="col-8">
+                                    <div class="text-end">
+                                        <h4 class="text-white fs-24">19°</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="d-flex justify-content-center align-items-center mt-4">
+                                <div class="col-2">
+                                    <h4 class="d-flex flex-nowrap flex-row column-gap-3 align-items-center">
+                                        <img src="/assets/images/snow.png" alt="" class="img-fluid">
+                                        <span
+                                            class="d-flex flex-wrap flex-column text-wrap fs-18 fw-normal text-grey">10:00
+                                            Snow</span>
+                                    </h4>
+                                </div>
+                                <div class="col-8">
+                                    <div class="text-end">
+                                        <h4 class="text-white fs-24">20°</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="d-flex justify-content-center align-items-center mt-4">
+                                <div class="col-2">
+                                    <h4 class="d-flex flex-row flex-nowrap column-gap-3 align-items-center">
+                                        <img src="/assets/images/snow.png" alt="" class="img-fluid">
+                                        <span
+                                            class="d-flex flex-wrap flex-column text-wrap fs-18 fw-normal text-grey">12:00
+                                            Snow</span>
+                                    </h4>
+                                </div>
+                                <div class="col-8">
+                                    <div class="text-end">
+                                        <h4 class="text-white fs-24">21°</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="d-flex justify-content-center align-items-center mt-4">
+                                <div class="col-2">
+                                    <h4 class="d-flex flex-row flex-nowrap column-gap-3 align-items-center">
+                                        <img src="/assets/images/snow.png" alt="" class="img-fluid">
+                                        <span
+                                            class="d-flex flex-nowrap flex-column text-wrap fs-18 fw-normal text-grey">02:00
+                                            Snow</span>
+                                    </h4>
+                                </div>
+
+                                <div class="col-8">
+                                    <div class="text-end">
+                                        <h4 class="text-white fs-24">21°</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>

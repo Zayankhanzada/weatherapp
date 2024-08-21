@@ -13,28 +13,28 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <!--font faimly-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap" rel="stylesheet">
     <!--Font-awesome css-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <!--Swiper CSS-->
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
     <!--Custom Stylesheet-->
     <link rel="stylesheet" href="/assets/css/style.css">
     <title>Weather Web Forecaster</title>
 </head>
 
-<body class="bg-cloudy">
+<body class="">
     <nav class="navbar bg-transparent align-items-center p-sm-4 p-2">
         <div class="container flex-nowrap">
             <a class="navbar-brand d-flex justify-content-center" href="#">
                 <img src="/assets/images/logo.svg" alt="Logo" class="">
             </a>
             <form id="location-form" class="search-box d-lg-none justify-content-start">
-                <input type="search" class="d-flex flex-grow-1 align-items-center flex-nowrap p-2 bg-transparent position-relative"
-                       name="search-box" placeholder="Search Location" id="location">
-                <button class="position-absolute start-85 border-0 bg-transparent" type="submit"><i class="bi bi-search text-white fs-24"></i></button>
+                <input type="search"
+                    class="d-flex flex-grow-1 align-items-center flex-nowrap p-2 bg-transparent position-relative"
+                    name="search-box" placeholder="Search Location" id="location">
+                <button class="position-absolute start-85 border-0 bg-transparent" type="submit"><i
+                        class="bi bi-search text-white fs-24"></i></button>
             </form>
 
         </div>
@@ -45,13 +45,13 @@
             <div class="row">
                 <div class="col-12 col-lg-10 ">
                     <div
-                        class="d-flex position-relative temperature flex-row align-items-center column-gap-lg-2 column-gap-md-0  mt-4">
+                        class="d-flex position-relative temperature flex-row align-items-lg-start column-gap-lg-2 column-gap-md-0  mt-4">
                         <div class="text-start">
-                            <h1 class="fw-semibold"> <span id="current-temp">--</span> </h1>
+                            <h1 class="fw-semibold"> <span class="current_temp">--</span> </h1>
                         </div>
-                        <div class="text-end mx-2">
-                            <p class="text-start fs-60" ><span id="location-name">-</span></p>
-                            <p class="fs-18 text-nowrap text-start"><span id="time">--:--</span> , <span id="day"> ---</span> , <span id="year">---</span> </p>
+                        <div class="text-end mx-2 ">
+                            <p class="text-start fs-60 city_name"><span class="">--</span></p>
+                            <p class="fs-18 text-nowrap text-start"><span class="time">--:--</span> </p>
                         </div>
                     </div>
                 </div>
@@ -71,7 +71,7 @@
                                         class=" d-flex justify-content-center flex-nowrap column-gap-2 align-items-center ">
                                         <span class="text-white fw-normal" id="feels-like">--°</span>
                                         <!-- <img src="/assets/images/hot-temp.png" alt="" class="img-fluid">-->
-                                    </h4> 
+                                    </h4>
                                 </div>
                             </div>
                         </div>
@@ -106,12 +106,12 @@
                         <div class="col-12">
                             <div class="d-flex justify-content-center column-gap-5  flex-nowrap">
                                 <div class="col-6">
-                                    <h4 class="text-grey text-center fw-normal" >Cloudy</h4>
+                                    <h4 class="text-grey text-center fw-normal">Cloudy</h4>
                                 </div>
                                 <div class="col-6">
                                     <h4
                                         class=" d-flex justify-content-center flex-nowrap column-gap-2 align-items-center ">
-                                        <span class="text-white fw-normal"id="cloudiness">--%</span>
+                                        <span class="text-white fw-normal" id="cloudiness">--%</span>
                                         <img src="/assets/images/Cloudy.png" alt="" class="img-fluid">
                                     </h4>
                                 </div>
@@ -208,21 +208,25 @@
                     </div>
                 </div>
             </div>
+
         </div>
     </section>
     <div class="offcanvas offcanvas-end show d-lg-flex d-none bg-transparent px-5 " tabindex="-1" id="offcanvasExample"
         aria-labelledby="offcanvasExampleLabel">
 
-        <form id="location-form" class="search-box d-none d-lg-flex justify-content-start">
-            <input type="search" class="d-flex flex-grow-1 align-items-center flex-nowrap p-2 bg-transparent position-relative"
-                   name="search-box" placeholder="Search Location" id="location">
-            <button class="position-absolute start-85 bg-transparent border-0" type="submit">
+        <div id="" class="search-box d-none d-lg-flex justify-content-start">
+            <input type="search"
+                class="d-flex flex-grow-1 align-items-center value-class flex-nowrap p-2 bg-transparent position-relative"
+                name="search-box" placeholder="Enter your City " id="cityInput">
+            <button class="position-absolute start-85 bg-transparent border-0" onclick="updateWeather('#cityInput') ">
                 <i class="bi bi-search text-white fs-24"></i>
             </button>
-        </form>
-        <p class="fs-18 text-white mt-5">Weather Details...</p>
+        </div>
+        <p class="fs-18 text-white mt-5 lazy-loading">Fetching Weather Details...</p>
         <div class="card weather-info border-0 p-0 bg-transparent mt-5">
-           <h3 class="fs-20 text-white d-flex align-items-center gap-2">Weather Status: <span class="fs-18 text-white text-uppercase text-center" id="weather-description"> --- </span><img id="weather-icon" src="" alt="" class="w-20"></h3>
+            <h3 class="fs-20 text-white d-flex align-items-center gap-2">Weather Status: <span
+                    class="fs-18 text-white text-uppercase text-center status"> --- </span><img class="icon w-20" src=""
+                    alt=""></h3>
             <div class="row justify-content-center bg-transparent row-gap-4 mt-5">
                 <div class="col-12">
                     <div class="d-flex justify-content-between column-gap-5 flex-nowrap">
@@ -230,34 +234,21 @@
                             <h4 class="text-grey fw-normal fs-18">Feels like</h4>
                         </div>
                         <div class="col-6">
-                            <h4 class=" d-flex flex-nowrap column-gap-2 align-items-center "> <span
-                                    class="text-white fs-18 fw-normal" id="feels-like">--°</span>
+                            <h4 class=" d-flex flex-nowrap column-gap-2 align-items-center ">
+                                <span class="text-white fs-18 fw-normal feels_like">--°</span>
                                 <!-- <img src="/assets/images/hot-temp.png" alt="" class="img-fluid"> -->
                             </h4>
                         </div>
                     </div>
                 </div>
-                <!-- <div class="col-12">
-                    <div class="d-flex justify-content-between column-gap-5 flex-nowrap">
-                        <div class="col-6">
-                            <h4 class="text-grey fw-normal fs-18">Temp max</h4>
-                        </div>
-                        <div class="col-6">
-                            <h4 class=" d-flex flex-nowrap column-gap-2 align-items-center "> <span
-                                    class="text-white fs-18 fw-normal" id="maxtemp">--°</span>
-                                <img src="/assets/images/hot-temp.png" alt="" class="img-fluid">
-                            </h4>
-                        </div>
-                    </div>
-                </div> -->
                 <div class="col-12">
                     <div class="d-flex justify-content-between column-gap-5 flex-nowrap">
                         <div class="col-6">
                             <h4 class="text-grey fw-normal fs-18">Average Temperature</h4>
                         </div>
                         <div class="col-6">
-                            <h4 class=" d-flex flex-nowrap column-gap-2 align-items-center "id="temp-min"> <span
-                                    class="text-white fs-18 fw-normal" id="avg-temp" >--°</span>
+                            <h4 class=" d-flex flex-nowrap column-gap-2 align-items-center " id="temp-min"> <span
+                                    class="text-white fs-18 fw-normal avg_temp">--°</span>
                                 <!-- <img src="/assets/images/cold-temp.png" alt="" class="img-fluid"> -->
                             </h4>
                         </div>
@@ -270,7 +261,7 @@
                         </div>
                         <div class="col-6">
                             <h4 class=" d-flex flex-nowrap column-gap-2 align-items-center "> <span
-                                    class="text-white fs-18 fw-normal" id="humidity">--%</span>
+                                    class="text-white fs-18 fw-normal humidity">--%</span>
                                 <img src="/assets/images/Humidity.png" alt="" class="img-fluid">
                             </h4>
                         </div>
@@ -283,7 +274,7 @@
                         </div>
                         <div class="col-6">
                             <h4 class=" d-flex flex-nowrap column-gap-2 align-items-center "> <span
-                                    class="text-white fs-18 fw-normal" id="cloudiness">--%</span>
+                                    class="text-white fs-18 fw-normal cloudy">--%</span>
                                 <img src="/assets/images/Cloudy.png" alt="" class="img-fluid">
                             </h4>
                         </div>
@@ -296,7 +287,7 @@
                         </div>
                         <div class="col-6">
                             <h4 class=" d-flex flex-nowrap column-gap-2 align-items-center "> <span
-                                    class="text-white fs-18 fw-normal" id="wind-speed">-- km/h</span>
+                                    class="text-white fs-18 fw-normal windy">-- km/h</span>
                                 <img src="/assets/images/windy.png" alt="" class="img-fluid">
                             </h4>
                         </div>
@@ -305,41 +296,44 @@
             </div>
         </div>
         <div class="card bg-transparent border-0 p-0 my-5">
-            <h3 class="text-white fw-normal fs-20">Today’s Weather Forecast...</h3>
+            <h3 class="text-white fw-normal fs-20">Upcoming Day's Forecast:</h3>
             <div class="row row-gap-4 mt-5">
                 <div class="col-12">
                     <div class="d-flex align-items-center mt-4">
-                        <div class="col-2">
+                        <div class="col-7">
                             <h4 class="d-flex flex-nowrap flex-row column-gap-3 align-items-center">
-                                <img src="/assets/images/snow.png" alt="" class="img-fluid">
-                                <span class="d-flex flex-wrap flex-column text-wrap fs-18 fw-normal text-grey">09:00
-                                    Snow</span>
+                                <img src="" alt="" class="img-fluid day2-icon">
+                                <span class="d-flex flex-wrap flex-column text-wrap fs-18 fw-normal text-white"><span
+                                        class="day2-date">09:00</span>
+                                    <span class="day2-condition">Snow</span></span>
                             </h4>
                         </div>
-                        <div class="col-8">
+                        <div class="col-5">
                             <div class="text-end">
-                                <h4 class="text-white fs-24">19°</h4>
+                                <h4 class="text-white fs-24 day2-temp">--°</h4>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-12">
                     <div class="d-flex align-items-center mt-4">
-                        <div class="col-2">
+                        <div class="col-7">
                             <h4 class="d-flex flex-nowrap flex-row column-gap-3 align-items-center">
-                                <img src="/assets/images/snow.png" alt="" class="img-fluid">
-                                <span class="d-flex flex-wrap flex-column text-wrap fs-18 fw-normal text-grey">10:00
-                                    Snow</span>
+                                <img src="" alt="" class="img-fluid day3-icon">
+                                <span class="d-flex flex-wrap flex-column text-wrap fs-18 fw-normal text-white"><span
+                                        class="day3-date">10:00</span>
+                                    <span class="day3-condition">Snow</span></span>
                             </h4>
                         </div>
-                        <div class="col-8">
+                        <div class="col-5">
                             <div class="text-end">
-                                <h4 class="text-white fs-24">20°</h4>
+                                <h4 class="text-white fs-24 day3-temp">--°</h4>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-12">
+
+                <!-- <div class="col-12">
                     <div class="d-flex align-items-center mt-4">
                         <div class="col-2">
                             <h4 class="d-flex flex-row flex-nowrap column-gap-3 align-items-center">
@@ -372,12 +366,13 @@
                         </div>
                     </div>
                 </div>
+                 -->
             </div>
         </div>
     </div>
 
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script src="/assets/js/main.js"></script>
 
 </body>
+
 </html>
