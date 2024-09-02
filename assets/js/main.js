@@ -2,6 +2,8 @@
 function invalidname() {
     alert("Invalid City");
 }
+
+
 // Functions for loading indicator
 function showLoading() {
     document.querySelector(".lazy-loading").style.display = "flex";
@@ -10,6 +12,59 @@ function showLoading() {
 function hideLoading() {
     document.querySelector(".lazy-loading").style.display = "none";
 }
+function getUserLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            position => {
+                const latitude = position.coords.latitude;
+                const longitude = position.coords.longitude;
+                getCityFromCoordinates(latitude, longitude);
+            },
+            error => {
+                console.error("Error getting location:", error);
+                alert("Unable to retrieve your location.");
+                hideLoading();
+                // Fetch weather for  random cities on page load
+const randomCities = ["London", "New York", "Tokyo", "Sydney", "Paris", "Karachi", "Multan", "Dubai", "Moscow", "Berlin", "Toronto"];
+window.onload = function () {
+    const randomCity = randomCities[Math.floor(Math.random() * randomCities.length)];
+    fetchWeather(randomCity);
+};
+            }
+        );
+    } else {
+        alert("Geolocation is not supported by this browser.");
+        hideLoading();
+    }
+}
+async function getCityFromCoordinates(lat, lon) {
+    const reverseGeocodeUrl = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=en`;
+
+    try {
+        const response = await fetch(reverseGeocodeUrl);
+        if (!response.ok) {
+            throw new Error('Unable to fetch city name');
+        }
+        const result = await response.json();
+        const city = result.city || result.locality || result.principalSubdivision;
+
+        if (city) {
+            console.log("Fetching weather for:", city);
+            fetchWeather(city);
+        } else {
+            alert('Unable to determine city from location.');
+            hideLoading();
+        }
+    } catch (error) {
+        console.error("Error fetching city from coordinates:", error);
+        alert("Error fetching city from location.");
+        hideLoading();
+    }
+}
+window.onload = function () {
+    showLoading();
+    getUserLocation();
+};
 
 // Function for getting city from the input field
 function updateWeather() {
@@ -93,7 +148,7 @@ async function fetchWeather(city) {
                 break;
             case 'Windy':
             case 'Mist':
-                document.querySelector('body').style.backgroundImage = 'url("https://images.pexels.com/photos/2449543/pexels-photo-2449543.jpeg?auto=compress&cs=tinysrgb&w=600")';
+                document.querySelector('body').style.backgroundImage = 'url("https://images.pexels.com/photos/907274/pexels-photo-907274.jpeg?auto=compress&cs=tinysrgb&w=600")';
                 break;
             case 'Thunderstorm':
             case 'Lightning':
@@ -142,9 +197,3 @@ async function fetchWeather(city) {
 
 
 
-// Fetch weather for  random cities on page load
-const randomCities = ["London", "New York", "Tokyo", "Sydney", "Paris", "Karachi", "Multan", "Dubai", "Moscow", "Berlin", "Toronto"];
-window.onload = function () {
-    const randomCity = randomCities[Math.floor(Math.random() * randomCities.length)];
-    fetchWeather(randomCity);
-};
